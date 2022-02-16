@@ -9,7 +9,7 @@ const Container = styled.div``;
 
 const Wrapper = styled.div`
 	display: flex;
-	height: calc(100vh - 80px);
+	height: calc(100vh - 80px); // Topbar 높이 제외
 `;
 
 const MainPage = () => {
