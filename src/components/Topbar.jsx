@@ -6,6 +6,8 @@ const Container = styled.div`
 	width: 100%;
 	height: 80px;
 	background-color: ${styles.themeColor};
+	position: sticky;
+	top: 0;
 `;
 
 const Wrapper = styled.div`
