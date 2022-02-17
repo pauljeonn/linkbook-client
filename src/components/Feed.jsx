@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { styles } from '../styles';
 import Post from './Post';
 import Share from './Share';
+import axios from 'axios';
 
 const Container = styled.div`
 	flex: 2;
@@ -14,10 +15,20 @@ const Container = styled.div`
 `;
 
 const Feed = () => {
+	const [post, setPost] = useState({});
+
+	useEffect(() => {
+		const fetchPost = async () => {
+			const res = await axios.get('posts/620e64dbabf0297796261348');
+			setPost(res.data);
+		};
+		fetchPost();
+	});
+
 	return (
 		<Container>
 			<Share />
-			<Post />
+			<Post post={post} />
 		</Container>
 	);
 };

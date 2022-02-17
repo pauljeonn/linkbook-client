@@ -41,7 +41,7 @@ const Like = styled.div``;
 
 const Comment = styled.div``;
 
-const Post = () => {
+const Post = ({ post }) => {
 	return (
 		<Container>
 			<Wrapper>
@@ -49,11 +49,11 @@ const Post = () => {
 					<UserName>전바울</UserName>
 				</Top>
 				<Center>
-					<Text>링크북 첫 게시물!</Text>
+					<Text>{post.text}</Text>
 				</Center>
 				<Bottom>
-					<Like>좋아요 5개</Like>
-					<Comment>댓글 3개</Comment>
+					<Like>좋아요 {post.likes ? post.likes.length : ''}개</Like>
+					<Comment>댓글 {post.comments ? post.comments.length : ''}개</Comment>
 				</Bottom>
 			</Wrapper>
 		</Container>
