@@ -54,7 +54,8 @@ const LoginInput = styled.input`
 const LoginBtn = styled.button`
 	height: 34px;
 	border: none;
-	background-color: ${styles.themeColor};
+	background-color: ${(props) =>
+		props.pending ? styles.GrayColor : styles.themeColor};
 	color: ${styles.whiteColor};
 	font-size: 16px;
 	font-weight: 400;
@@ -69,7 +70,7 @@ const LoginPage = () => {
 	const email = useRef();
 	const password = useRef();
 
-	const { user, pending, error, dispatch } = useContext(AuthContext);
+	const { pending, dispatch } = useContext(AuthContext);
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -77,7 +78,6 @@ const LoginPage = () => {
 			{ email: email.current.value, password: password.current.value },
 			dispatch
 		);
-		console.log(user);
 	};
 
 	return (
@@ -95,7 +95,9 @@ const LoginPage = () => {
 								type="password"
 								ref={password}
 							/>
-							<LoginBtn type="submit">로그인</LoginBtn>
+							<LoginBtn type="submit" pending={pending}>
+								로그인
+							</LoginBtn>
 						</LoginForm>
 					</LoginContainer>
 				</Right>
