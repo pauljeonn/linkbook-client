@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { styles } from '../styles';
 import Post from './Post';
 import Share from './Share';
 import axios from 'axios';
+import { AuthContext } from '../contexts/authContext';
 
 const Container = styled.div`
 	flex: 2;

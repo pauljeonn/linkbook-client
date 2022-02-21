@@ -1,5 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
 
 const Container = styled.div`
@@ -63,17 +65,43 @@ const ShareBtn = styled.button`
 `;
 
 const Share = () => {
+	const { user } = useContext(AuthContext);
+
+	const [text, setText] = useState('');
+
+	useEffect(() => {
+		console.log(user);
+	}, []);
+
+	const changeShareText = (e) => {
+		setText(e.target.value);
+	};
+
+	const handleShare = async () => {
+		const newPost = {
+			userId: user._id,
+			text: text,
+		};
+		console.log(newPost);
+		await axios.post('/posts', newPost);
+		setText(''); // 공유 후 text input 지우기
+	};
+
 	return (
 		<Container>
 			<Wrapper>
 				<Top>
-					<ShareInput placeholder="무슨 생각을 하고 계신가요?" />
+					<ShareInput
+						placeholder="무슨 생각을 하고 계신가요?"
+						onChange={changeShareText}
+						value={text}
+					/>
 				</Top>
 				<Hr />
 				<Bottom>
 					<BottomLeft></BottomLeft>
 					<BottomRight>
-						<ShareBtn>공유</ShareBtn>
+						<ShareBtn onClick={handleShare}>공유</ShareBtn>
 					</BottomRight>
 				</Bottom>
 			</Wrapper>

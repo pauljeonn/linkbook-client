@@ -85,7 +85,6 @@ const RegisterPage = () => {
 				email: email.current.value,
 				password: password.current.value,
 			};
-			console.log(newUser);
 
 			try {
 				// 회원 등록
