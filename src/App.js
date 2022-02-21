@@ -2,6 +2,7 @@ import './App.css';
 import { useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainPage from './pages/MainPage';
+import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { AuthContext } from './contexts/authContext';
@@ -13,6 +14,7 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<MainPage />} />
+				<Route path="/profile" element={<ProfilePage />} />
 				<Route
 					path="/login"
 					element={user ? <Navigate to="/" /> : <LoginPage />}
