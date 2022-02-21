@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
+import { login } from '../api';
+import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
 
 const Container = styled.div`
@@ -64,8 +66,18 @@ const LoginBtn = styled.button`
 `;
 
 const LoginPage = () => {
+	const email = useRef();
+	const password = useRef();
+
+	const { user, pending, error, dispatch } = useContext(AuthContext);
+
 	const handleLogin = (e) => {
 		e.preventDefault();
+		login(
+			{ email: email.current.value, password: password.current.value },
+			dispatch
+		);
+		console.log(user);
 	};
 
 	return (
@@ -77,8 +89,12 @@ const LoginPage = () => {
 				<Right>
 					<LoginContainer>
 						<LoginForm onSubmit={handleLogin}>
-							<LoginInput placeholder="이메일" type="email" />
-							<LoginInput placeholder="비밀번호" type="password" />
+							<LoginInput placeholder="이메일" type="email" ref={email} />
+							<LoginInput
+								placeholder="비밀번호"
+								type="password"
+								ref={password}
+							/>
 							<LoginBtn type="submit">로그인</LoginBtn>
 						</LoginForm>
 					</LoginContainer>
