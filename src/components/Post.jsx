@@ -1,7 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { styles } from '../styles';
+import { MdOutlineThumbUp } from 'react-icons/md';
+import { AuthContext } from '../contexts/authContext';
 
 const Container = styled.div`
 	width: 90%;
@@ -38,12 +40,27 @@ const Bottom = styled.div`
 	font-size: 14px;
 `;
 
-const Like = styled.div``;
+const Like = styled.div`
+	height: 20px;
+	display: flex;
+	align-items: center;
+`;
+
+const LikeIcon = styled.div`
+	margin-right: 5px;
+	font-size: 18px;
+	color: ${(props) => (props.isLiked ? styles.themeColor : styles.blackColor)};
+	cursor: pointer;
+`;
 
 const Comment = styled.div``;
 
 const Post = ({ post }) => {
+	const { user: currentUser } = useContext(AuthContext);
+
 	const [user, setUser] = useState({});
+	const [likes, setLikes] = useState(post.likes.length);
+	const [isLiked, setIsLiked] = useState(false);
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -53,6 +70,18 @@ const Post = ({ post }) => {
 		};
 		fetchUser();
 	}, [post.userId]);
+
+	const handleLike = async () => {
+		// 로컬 데이터 및 UI 핸들링
+		setLikes(isLiked ? likes - 1 : likes + 1);
+		setIsLiked(!isLiked);
+		// 실제 좋아요 데이터 반영
+		try {
+			await axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<Container>
@@ -64,7 +93,12 @@ const Post = ({ post }) => {
 					<Text>{post.text}</Text>
 				</Center>
 				<Bottom>
-					<Like>좋아요 {post.likes ? post.likes.length : ''}개</Like>
+					<Like>
+						<LikeIcon onClick={handleLike} isLiked={isLiked}>
+							<MdOutlineThumbUp />
+						</LikeIcon>
+						{post.likes && likes}개
+					</Like>
 					<Comment>댓글 {post.comments ? post.comments.length : ''}개</Comment>
 				</Bottom>
 			</Wrapper>
