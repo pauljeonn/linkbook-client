@@ -50,10 +50,13 @@ const Rightbar = () => {
 		<Container>
 			<Wrapper>
 				<SectionContainer>
-					<SectionTitle>친구 목록</SectionTitle>
+					<SectionTitle>Friends</SectionTitle>
 					<FriendContainer>
 						{friends.map((friend) => (
-							<FriendName onClick={() => navigate(`/profile/${friend._id}`)}>
+							<FriendName
+								key={friend._id}
+								onClick={() => navigate(`/profile/${friend._id}`)}
+							>
 								{friend.username}
 							</FriendName>
 						))}

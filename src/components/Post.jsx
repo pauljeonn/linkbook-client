@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { styles } from '../styles';
-import { MdOutlineThumbUp } from 'react-icons/md';
+import { MdOutlineThumbUp, MdOutlineMoreVert } from 'react-icons/md';
 import { AuthContext } from '../contexts/authContext';
 
 const Container = styled.div`
@@ -14,16 +14,98 @@ const Container = styled.div`
 	padding: 20px;
 `;
 
+const Overlay = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.1);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: ${(props) => (props.isDelete ? 10 : -10)};
+`;
+
+const ConfirmContainer = styled.div`
+	width: 400px;
+	height: 150px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+`;
+
+const ConfirmHeader = styled.div`
+	height: 50px;
+	background-color: ${styles.themeColor};
+	color: white;
+	padding: 10px;
+`;
+
+const ConfirmBody = styled.div`
+	height: 50px;
+	padding: 10px;
+`;
+
+const ConfirmButtonContainer = styled.div`
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const ConfirmBtn = styled.button`
+	width: 80px;
+	height: 30px;
+	margin: 0 10px;
+	border: none;
+	background-color: ${styles.themeColor};
+	color: white;
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(110%);
+	}
+`;
+
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
 
-const Top = styled.div``;
+const Top = styled.div`
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+`;
 
 const UserName = styled.div`
 	font-size: 16px;
 	font-weight: 500;
+`;
+
+const MoreIcon = styled.div`
+	cursor: pointer;
+`;
+
+const MoreContainer = styled.div`
+	width: 80px;
+	height: 50px;
+	background-color: white;
+	position: absolute;
+	right: 18px;
+	z-index: ${(props) => (props.isMore ? 3 : -3)};
+`;
+
+const MoreItem = styled.div`
+	height: 50%;
+	border: 1px solid ${styles.GrayColor};
+	font-size: 14px;
+	text-align: center;
+	user-select: none;
+	cursor: pointer;
 `;
 
 const Center = styled.div`
@@ -60,7 +142,10 @@ const Post = ({ post }) => {
 
 	const [user, setUser] = useState({});
 	const [likes, setLikes] = useState(post.likes.length);
-	const [isLiked, setIsLiked] = useState(false);
+	// 현재 접속한 유저의 좋아요 여부에 따라 isLiked 초기 설정하기
+	const [isLiked, setIsLiked] = useState(post.likes.includes(currentUser._id));
+	const [isMore, setIsMore] = useState(false);
+	const [isDelete, setIsDelete] = useState(false);
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -71,6 +156,30 @@ const Post = ({ post }) => {
 		fetchUser();
 	}, [post.userId]);
 
+	const toggleMore = () => {
+		setIsMore(!isMore);
+	};
+
+	// 게시물 삭제 확인 메시지 토글
+	const toggleDelete = () => {
+		setIsDelete(!isDelete);
+	};
+
+	// 게시물 삭제
+	const confirmDelete = async () => {
+		try {
+			console.log(post._id);
+			await axios.delete(`/posts/${post._id}`, {
+				data: { userId: currentUser._id },
+			});
+			// 게시물 삭제 후 새로고침
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	// 좋아요
 	const handleLike = async () => {
 		// 로컬 데이터 및 UI 핸들링
 		setLikes(isLiked ? likes - 1 : likes + 1);
@@ -85,9 +194,26 @@ const Post = ({ post }) => {
 
 	return (
 		<Container>
+			<Overlay isDelete={isDelete}>
+				<ConfirmContainer>
+					<ConfirmHeader>게시물 삭제</ConfirmHeader>
+					<ConfirmBody>해당 게시물을 정말 삭제하시겠습니까?</ConfirmBody>
+					<ConfirmButtonContainer>
+						<ConfirmBtn onClick={toggleDelete}>취소</ConfirmBtn>
+						<ConfirmBtn onClick={confirmDelete}>확인</ConfirmBtn>
+					</ConfirmButtonContainer>
+				</ConfirmContainer>
+			</Overlay>
 			<Wrapper>
 				<Top>
 					<UserName>{user.username}</UserName>
+					<MoreIcon onClick={toggleMore}>
+						<MdOutlineMoreVert />
+					</MoreIcon>
+					<MoreContainer isMore={isMore}>
+						<MoreItem>수정</MoreItem>
+						<MoreItem onClick={toggleDelete}>삭제</MoreItem>
+					</MoreContainer>
 				</Top>
 				<Center>
 					<Text>{post.text}</Text>
