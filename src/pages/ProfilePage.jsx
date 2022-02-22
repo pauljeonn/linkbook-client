@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Feed from '../components/Feed';
 import Leftbar from '../components/Leftbar';
 import Rightbar from '../components/Rightbar';
 import Topbar from '../components/Topbar';
-import { AuthContext } from '../contexts/authContext';
 
 const Container = styled.div``;
 
@@ -57,11 +58,18 @@ const ProfileRightBottom = styled.div`
 `;
 
 const ProfilePage = () => {
-	const { user } = useContext(AuthContext);
+	const params = useParams();
+
+	const [user, setUser] = useState({});
 
 	useEffect(() => {
-		console.log(user);
-	});
+		const fetchUser = async () => {
+			// 현재 프로필을 방문한 유저 정보 가져오기
+			const res = await axios.get(`/users/${params.id}`);
+			setUser(res.data);
+		};
+		fetchUser();
+	}, []);
 
 	return (
 		<Container>

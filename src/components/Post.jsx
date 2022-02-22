@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { styles } from '../styles';
 
@@ -42,11 +43,22 @@ const Like = styled.div``;
 const Comment = styled.div``;
 
 const Post = ({ post }) => {
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		const fetchUser = async () => {
+			// 게시물의 유저 아이디를 통해 유저 정보 불러오기
+			const res = await axios.get(`users/${post.userId}`);
+			setUser(res.data);
+		};
+		fetchUser();
+	}, [post.userId]);
+
 	return (
 		<Container>
 			<Wrapper>
 				<Top>
-					<UserName>전바울</UserName>
+					<UserName>{user.username}</UserName>
 				</Top>
 				<Center>
 					<Text>{post.text}</Text>

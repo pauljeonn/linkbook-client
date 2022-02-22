@@ -39,6 +39,7 @@ const UserInfo = styled.div`
 	display: flex;
 	justify-content: right;
 	align-items: center;
+	cursor: pointer;
 `;
 
 const Logo = styled.div`
@@ -61,7 +62,7 @@ const Topbar = () => {
 				</Left>
 				<Center></Center>
 				<Right>
-					<UserInfo onClick={() => navigate('/profile')}>
+					<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
 						{user.username}
 					</UserInfo>
 				</Right>

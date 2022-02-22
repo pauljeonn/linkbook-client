@@ -13,9 +13,12 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<MainPage />} />
 				<Route
-					path="/profile"
+					path="/"
+					element={user ? <MainPage /> : <Navigate to="/login" />}
+				/>
+				<Route
+					path="/profile/:id"
 					element={user ? <ProfilePage /> : <Navigate to="/login" />}
 				/>
 				<Route
