@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
 
 const Container = styled.div`
@@ -8,6 +10,7 @@ const Container = styled.div`
 	background-color: ${styles.themeColor};
 	position: sticky;
 	top: 0;
+	z-index: 5;
 `;
 
 const Wrapper = styled.div`
@@ -30,6 +33,14 @@ const Right = styled.div`
 	flex: 2;
 `;
 
+const UserInfo = styled.div`
+	height: 100%;
+	color: white;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+`;
+
 const Logo = styled.div`
 	font-size: 32px;
 	font-weight: 700;
@@ -38,14 +49,22 @@ const Logo = styled.div`
 `;
 
 const Topbar = () => {
+	const navigate = useNavigate();
+
+	const { user } = useContext(AuthContext);
+
 	return (
 		<Container>
 			<Wrapper>
 				<Left>
-					<Logo>LINKBOOK</Logo>
+					<Logo onClick={() => navigate('/')}>LINKBOOK</Logo>
 				</Left>
 				<Center></Center>
-				<Right></Right>
+				<Right>
+					<UserInfo onClick={() => navigate('/profile')}>
+						{user.username}
+					</UserInfo>
+				</Right>
 			</Wrapper>
 		</Container>
 	);

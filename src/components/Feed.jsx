@@ -16,20 +16,28 @@ const Container = styled.div`
 `;
 
 const Feed = () => {
-	const [post, setPost] = useState({});
+	const { user } = useContext(AuthContext);
+
+	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		const fetchPost = async () => {
-			const res = await axios.get('posts/620e64dbabf0297796261348');
-			setPost(res.data);
+		const fetchPosts = async () => {
+			try {
+				const res = await axios.get(`posts/timeline/${user._id}`);
+				setPosts(res.data);
+			} catch (err) {
+				console.log(err);
+			}
 		};
-		fetchPost();
-	});
+		fetchPosts();
+	}, [user._id]);
 
 	return (
 		<Container>
 			<Share />
-			<Post post={post} />
+			{posts.map((post) => (
+				<Post key={post._id} post={post} />
+			))}
 		</Container>
 	);
 };

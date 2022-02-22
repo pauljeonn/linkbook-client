@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Feed from '../components/Feed';
 import Leftbar from '../components/Leftbar';
 import Rightbar from '../components/Rightbar';
 import Topbar from '../components/Topbar';
+import { AuthContext } from '../contexts/authContext';
 
 const Container = styled.div``;
 
@@ -39,7 +40,7 @@ const ProfileUserImg = styled.img`
 	right: 0;
 	margin: auto;
 	bottom: -20px;
-	z-index: 5;
+	z-index: 3;
 `;
 
 const ProfileUserName = styled.div`
@@ -56,6 +57,12 @@ const ProfileRightBottom = styled.div`
 `;
 
 const ProfilePage = () => {
+	const { user } = useContext(AuthContext);
+
+	useEffect(() => {
+		console.log(user);
+	});
+
 	return (
 		<Container>
 			<Topbar />
@@ -66,7 +73,7 @@ const ProfilePage = () => {
 						<ProfileCoverImg />
 						<ProfileUserImg />
 					</ProfileCover>
-					<ProfileUserName>User Name</ProfileUserName>
+					<ProfileUserName>{user && user.username}</ProfileUserName>
 					<ProfileRightBottom>
 						<Feed />
 						<Rightbar />

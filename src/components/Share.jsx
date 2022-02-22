@@ -84,7 +84,8 @@ const Share = () => {
 		};
 		console.log(newPost);
 		await axios.post('/posts', newPost);
-		setText(''); // 공유 후 text input 지우기
+		// 게시물 공유 후 리렌더링을 위해 윈도우 리로딩
+		window.location.reload();
 	};
 
 	return (
