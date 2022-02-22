@@ -160,7 +160,7 @@ const Post = ({ post }) => {
 		setIsMore(!isMore);
 	};
 
-	// 게시물 삭제 확인 메시지 토글
+	// 게시물 삭제 컨펌 toggle
 	const toggleDelete = () => {
 		setIsDelete(!isDelete);
 	};

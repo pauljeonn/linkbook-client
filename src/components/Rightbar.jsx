@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
@@ -33,6 +33,7 @@ const FriendName = styled.div`
 
 const Rightbar = () => {
 	const navigate = useNavigate();
+	const params = useParams();
 
 	const { user } = useContext(AuthContext);
 
@@ -40,11 +41,21 @@ const Rightbar = () => {
 
 	useEffect(() => {
 		const fetchFriends = async () => {
-			const res = await axios.get(`users/friends/${user._id}`);
-			setFriends(res.data);
+			try {
+				//프로필 페이지 방문 시 해당 유저의 포스트만 불러오기
+				if (params.id) {
+					const res = await axios.get(`/users/friends/${params.id}`);
+					setFriends(res.data);
+				} else {
+					const res = await axios.get(`users/friends/${user._id}`);
+					setFriends(res.data);
+				}
+			} catch (err) {
+				console.log(err);
+			}
 		};
 		fetchFriends();
-	}, [user._id]);
+	}, [user._id, params.id]);
 
 	return (
 		<Container>

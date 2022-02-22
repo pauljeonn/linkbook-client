@@ -5,6 +5,7 @@ import Post from './Post';
 import Share from './Share';
 import axios from 'axios';
 import { AuthContext } from '../contexts/authContext';
+import { useParams } from 'react-router-dom';
 
 const Container = styled.div`
 	flex: 2;
@@ -16,6 +17,8 @@ const Container = styled.div`
 `;
 
 const Feed = () => {
+	const params = useParams();
+
 	const { user } = useContext(AuthContext);
 
 	const [posts, setPosts] = useState([]);
@@ -23,14 +26,21 @@ const Feed = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
-				const res = await axios.get(`posts/timeline/${user._id}`);
-				setPosts(res.data);
+				//프로필 페이지 방문 시 해당 유저의 포스트만 불러오기
+				if (params.id) {
+					const res = await axios.get(`/posts/profile/${params.id}`);
+					setPosts(res.data);
+				} else {
+					console.log('ELSE');
+					const res = await axios.get(`posts/timeline/${user._id}`);
+					setPosts(res.data);
+				}
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		fetchPosts();
-	}, [user._id]);
+	}, [user._id, params.id]);
 
 	return (
 		<Container>

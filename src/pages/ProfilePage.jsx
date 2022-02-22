@@ -64,12 +64,12 @@ const ProfilePage = () => {
 
 	useEffect(() => {
 		const fetchUser = async () => {
-			// 현재 프로필을 방문한 유저 정보 가져오기
+			// 프로필 유저 정보 가져오기
 			const res = await axios.get(`/users/${params.id}`);
 			setUser(res.data);
 		};
 		fetchUser();
-	}, []);
+	}, [params.id]);
 
 	return (
 		<Container>
@@ -81,7 +81,7 @@ const ProfilePage = () => {
 						<ProfileCoverImg />
 						<ProfileUserImg />
 					</ProfileCover>
-					<ProfileUserName>{user && user.username}</ProfileUserName>
+					<ProfileUserName>{user.username}</ProfileUserName>
 					<ProfileRightBottom>
 						<Feed />
 						<Rightbar />
