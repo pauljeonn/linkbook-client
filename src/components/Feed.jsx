@@ -31,8 +31,7 @@ const Feed = () => {
 					const res = await axios.get(`/posts/profile/${params.id}`);
 					setPosts(res.data);
 				} else {
-					console.log('ELSE');
-					const res = await axios.get(`posts/timeline/${user._id}`);
+					const res = await axios.get(`/posts/timeline/${user._id}`);
 					setPosts(res.data);
 				}
 			} catch (err) {

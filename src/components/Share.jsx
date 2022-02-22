@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
@@ -69,10 +69,6 @@ const Share = () => {
 
 	const [text, setText] = useState('');
 
-	useEffect(() => {
-		console.log(user);
-	}, []);
-
 	const changeShareText = (e) => {
 		setText(e.target.value);
 	};
@@ -82,7 +78,6 @@ const Share = () => {
 			userId: user._id,
 			text: text,
 		};
-		console.log(newPost);
 		await axios.post('/posts', newPost);
 		// 게시물 공유 후 리렌더링을 위해 윈도우 리로딩
 		window.location.reload();

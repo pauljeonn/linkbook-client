@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { styles } from '../styles';
 import { MdOutlineThumbUp, MdOutlineMoreVert } from 'react-icons/md';
 import { AuthContext } from '../contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
 	width: 90%;
@@ -81,6 +82,20 @@ const Top = styled.div`
 	position: relative;
 `;
 
+const UserInfo = styled.div`
+	height: 30px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+`;
+
+const UserImg = styled.img`
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	margin-right: 5px;
+`;
+
 const UserName = styled.div`
 	font-size: 16px;
 	font-weight: 500;
@@ -138,6 +153,7 @@ const LikeIcon = styled.div`
 const Comment = styled.div``;
 
 const Post = ({ post }) => {
+	const navigate = useNavigate();
 	const { user: currentUser } = useContext(AuthContext);
 
 	const [user, setUser] = useState({});
@@ -150,7 +166,7 @@ const Post = ({ post }) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			// 게시물의 유저 아이디를 통해 유저 정보 불러오기
-			const res = await axios.get(`users/${post.userId}`);
+			const res = await axios.get(`/users/${post.userId}`);
 			setUser(res.data);
 		};
 		fetchUser();
@@ -168,7 +184,6 @@ const Post = ({ post }) => {
 	// 게시물 삭제
 	const confirmDelete = async () => {
 		try {
-			console.log(post._id);
 			await axios.delete(`/posts/${post._id}`, {
 				data: { userId: currentUser._id },
 			});
@@ -206,7 +221,16 @@ const Post = ({ post }) => {
 			</Overlay>
 			<Wrapper>
 				<Top>
-					<UserName>{user.username}</UserName>
+					<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
+						<UserImg
+							src={
+								user.profilePicture
+									? user.profilePicture
+									: '/images/default.jpeg'
+							}
+						/>
+						<UserName>{user.username}</UserName>
+					</UserInfo>
 					<MoreIcon onClick={toggleMore}>
 						<MdOutlineMoreVert />
 					</MoreIcon>

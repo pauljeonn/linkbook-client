@@ -42,6 +42,16 @@ const UserInfo = styled.div`
 	cursor: pointer;
 `;
 
+const UserImg = styled.img`
+	width: 46px;
+	height: 46px;
+	border: 1px solid white;
+	border-radius: 50%;
+	margin-right: 10px;
+`;
+
+const UserName = styled.div``;
+
 const Logo = styled.div`
 	font-size: 32px;
 	font-weight: 700;
@@ -63,7 +73,14 @@ const Topbar = () => {
 				<Center></Center>
 				<Right>
 					<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
-						{user.username}
+						<UserImg
+							src={
+								user.profilePicture
+									? user.profilePicture
+									: '/images/default.jpeg'
+							}
+						/>
+						<UserName>{user.username}</UserName>
 					</UserInfo>
 				</Right>
 			</Wrapper>

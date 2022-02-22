@@ -21,11 +21,21 @@ const SectionTitle = styled.div`
 	font-weight: 500;
 `;
 
-const FriendContainer = styled.div`
+const FriendList = styled.div`
 	padding: 10px;
 `;
 
-const FriendImg = styled.img``;
+const FriendInfo = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
+const FriendImg = styled.img`
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	margin-right: 5px;
+`;
 
 const FriendName = styled.div`
 	cursor: pointer;
@@ -62,16 +72,22 @@ const Rightbar = () => {
 			<Wrapper>
 				<SectionContainer>
 					<SectionTitle>Friends</SectionTitle>
-					<FriendContainer>
+					<FriendList>
 						{friends.map((friend) => (
-							<FriendName
-								key={friend._id}
-								onClick={() => navigate(`/profile/${friend._id}`)}
-							>
-								{friend.username}
-							</FriendName>
+							<FriendInfo key={friend._id}>
+								<FriendImg
+									src={
+										friend.profilePicture
+											? friend.profilePicture
+											: '/images/default.jpeg'
+									}
+								/>
+								<FriendName onClick={() => navigate(`/profile/${friend._id}`)}>
+									{friend.username}
+								</FriendName>
+							</FriendInfo>
 						))}
-					</FriendContainer>
+					</FriendList>
 				</SectionContainer>
 			</Wrapper>
 		</Container>

@@ -31,10 +31,10 @@ const ProfileCoverImg = styled.img`
 `;
 
 const ProfileUserImg = styled.img`
-	width: 140px;
-	height: 140px;
+	width: 150px;
+	height: 150px;
 	background-color: pink;
-	border: 5px solid white;
+	border: 4px solid white;
 	border-radius: 50%;
 	position: absolute;
 	left: 0;
@@ -79,7 +79,13 @@ const ProfilePage = () => {
 				<ProfileWrapper>
 					<ProfileCover>
 						<ProfileCoverImg />
-						<ProfileUserImg />
+						<ProfileUserImg
+							src={
+								user.profilePicture
+									? user.profilePicture
+									: '/images/default.jpeg'
+							}
+						/>
 					</ProfileCover>
 					<ProfileUserName>{user.username}</ProfileUserName>
 					<ProfileRightBottom>
