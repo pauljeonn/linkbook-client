@@ -55,7 +55,7 @@ const LoginBtn = styled.button`
 	height: 34px;
 	border: none;
 	background-color: ${(props) =>
-		props.pending ? styles.GrayColor : styles.themeColor};
+		props.pending ? styles.grayColor : styles.themeColor};
 	color: ${styles.whiteColor};
 	font-size: 16px;
 	font-weight: 400;

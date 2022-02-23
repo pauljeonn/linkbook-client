@@ -4,5 +4,6 @@ export const styles = {
 	blackColor: '#000',
 	whiteColor: '#fff',
 	lightGrayColor: '#eee',
-	GrayColor: '#ccc',
+	grayColor: '#ccc',
+	darkGrayColor: '#888',
 };

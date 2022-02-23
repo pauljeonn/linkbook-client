@@ -5,6 +5,9 @@ import { styles } from '../styles';
 import { MdOutlineThumbUp, MdOutlineMoreVert } from 'react-icons/md';
 import { AuthContext } from '../contexts/authContext';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/ko';
 
 const Container = styled.div`
 	width: 90%;
@@ -82,10 +85,16 @@ const Top = styled.div`
 	position: relative;
 `;
 
+const PostInfo = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
 const UserInfo = styled.div`
 	height: 30px;
 	display: flex;
 	align-items: center;
+	margin-right: 6px;
 	cursor: pointer;
 `;
 
@@ -99,6 +108,11 @@ const UserImg = styled.img`
 const UserName = styled.div`
 	font-size: 16px;
 	font-weight: 500;
+`;
+
+const PostDate = styled.div`
+	color: ${styles.darkGrayColor};
+	font-size: 13px;
 `;
 
 const MoreIcon = styled.div`
@@ -163,6 +177,8 @@ const Post = ({ post }) => {
 	const [isMore, setIsMore] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
 
+	const [postDate, setPostDate] = useState('');
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			// 게시물의 유저 아이디를 통해 유저 정보 불러오기
@@ -171,6 +187,14 @@ const Post = ({ post }) => {
 		};
 		fetchUser();
 	}, [post.userId]);
+
+	// dayjs 사용해서 포스트 날짜 표시
+	useEffect(() => {
+		dayjs.extend(relativeTime);
+		dayjs.locale('ko'); // 한국어로 표시
+		const timeAgo = dayjs(post.createdAt).fromNow();
+		setPostDate(timeAgo);
+	}, [post.createdAt]);
 
 	const toggleMore = () => {
 		setIsMore(!isMore);
@@ -221,16 +245,19 @@ const Post = ({ post }) => {
 			</Overlay>
 			<Wrapper>
 				<Top>
-					<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
-						<UserImg
-							src={
-								user.profilePicture
-									? user.profilePicture
-									: '/images/default.jpeg'
-							}
-						/>
-						<UserName>{user.username}</UserName>
-					</UserInfo>
+					<PostInfo>
+						<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
+							<UserImg
+								src={
+									user.profilePicture
+										? user.profilePicture
+										: '/images/default.jpeg'
+								}
+							/>
+							<UserName>{user.username}</UserName>
+						</UserInfo>
+						<PostDate>{postDate}</PostDate>
+					</PostInfo>
 					<MoreIcon onClick={toggleMore}>
 						<MdOutlineMoreVert />
 					</MoreIcon>
