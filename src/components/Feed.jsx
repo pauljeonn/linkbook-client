@@ -29,10 +29,20 @@ const Feed = () => {
 				//프로필 페이지 방문 시 해당 유저의 포스트만 불러오기
 				if (params.id) {
 					const res = await axios.get(`/posts/profile/${params.id}`);
-					setPosts(res.data);
+					// 게시물 최신순으로 정렬하기
+					setPosts(
+						res.data.sort((a, b) => {
+							return new Date(b.createdAt) - new Date(a.createdAt);
+						})
+					);
 				} else {
 					const res = await axios.get(`/posts/timeline/${user._id}`);
-					setPosts(res.data);
+					// 게시물 최신순으로 정렬하기
+					setPosts(
+						res.data.sort((a, b) => {
+							return new Date(b.createdAt) - new Date(a.createdAt);
+						})
+					);
 				}
 			} catch (err) {
 				console.log(err);

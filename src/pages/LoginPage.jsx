@@ -74,6 +74,7 @@ const LoginPage = () => {
 
 	const handleLogin = (e) => {
 		e.preventDefault();
+		// 비동기 로그인 함수 호출
 		login(
 			{ email: email.current.value, password: password.current.value },
 			dispatch

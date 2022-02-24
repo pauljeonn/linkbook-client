@@ -11,7 +11,7 @@ import 'dayjs/locale/ko';
 
 const Container = styled.div`
 	width: 90%;
-	margin: 20px 0;
+	margin: 12px 0;
 	border-radius: 5px;
 	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
 	background-color: ${styles.whiteColor};
@@ -99,8 +99,9 @@ const UserInfo = styled.div`
 `;
 
 const UserImg = styled.img`
-	width: 28px;
-	height: 28px;
+	width: 30px;
+	height: 30px;
+	object-fit: cover;
 	border-radius: 50%;
 	margin-right: 5px;
 `;

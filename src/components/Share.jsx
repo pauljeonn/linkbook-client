@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
+import { MdCameraAlt } from 'react-icons/md';
 
 const Container = styled.div`
 	width: 90%;
@@ -10,6 +11,7 @@ const Container = styled.div`
 	border-radius: 5px;
 	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
 	background-color: ${styles.whiteColor};
+	margin-bottom: 12px;
 `;
 
 const Wrapper = styled.div`
@@ -43,6 +45,20 @@ const Bottom = styled.div`
 const BottomLeft = styled.div`
 	width: 80%;
 	height: 100%;
+	display: flex;
+	align-items: center;
+	/* background-color: pink; */
+`;
+
+const PhotoIcon = styled.div`
+	color: black;
+	font-size: 22px;
+	margin: 0 4px;
+`;
+
+const PhotoText = styled.div`
+	font-size: 14px;
+	margin-bottom: 4px;
 `;
 
 const BottomRight = styled.div`
@@ -95,7 +111,12 @@ const Share = () => {
 				</Top>
 				<Hr />
 				<Bottom>
-					<BottomLeft></BottomLeft>
+					<BottomLeft>
+						<PhotoIcon>
+							<MdCameraAlt />
+						</PhotoIcon>
+						<PhotoText>사진</PhotoText>
+					</BottomLeft>
 					<BottomRight>
 						<ShareBtn onClick={handleShare}>공유</ShareBtn>
 					</BottomRight>

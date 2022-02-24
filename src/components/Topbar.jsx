@@ -45,6 +45,7 @@ const UserInfo = styled.div`
 const UserImg = styled.img`
 	width: 46px;
 	height: 46px;
+	object-fit: cover;
 	border: 1px solid white;
 	border-radius: 50%;
 	margin-right: 10px;

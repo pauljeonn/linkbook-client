@@ -33,7 +33,7 @@ const ProfileCoverImg = styled.img`
 const ProfileUserImg = styled.img`
 	width: 150px;
 	height: 150px;
-	background-color: pink;
+	object-fit: cover;
 	border: 4px solid white;
 	border-radius: 50%;
 	position: absolute;
