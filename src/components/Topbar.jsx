@@ -39,7 +39,6 @@ const UserInfo = styled.div`
 	display: flex;
 	justify-content: right;
 	align-items: center;
-	cursor: pointer;
 `;
 
 const UserImg = styled.img`
@@ -49,9 +48,12 @@ const UserImg = styled.img`
 	border: 1px solid white;
 	border-radius: 50%;
 	margin-right: 10px;
+	cursor: pointer;
 `;
 
-const UserName = styled.div``;
+const Logout = styled.div`
+	cursor: pointer;
+`;
 
 const Logo = styled.div`
 	font-size: 32px;
@@ -63,7 +65,12 @@ const Logo = styled.div`
 const Topbar = () => {
 	const navigate = useNavigate();
 
-	const { user } = useContext(AuthContext);
+	const { user, dispatch } = useContext(AuthContext);
+
+	const handleLogout = () => {
+		dispatch({ type: 'LOGOUT' }); // Context 유저 객체 제거
+		localStorage.clear(); // 로컬스토리지에서 유저 객체 삭제
+	};
 
 	return (
 		<Container>
@@ -81,7 +88,7 @@ const Topbar = () => {
 									: '/images/default.jpeg'
 							}
 						/>
-						<UserName>{user.username}</UserName>
+						<Logout onClick={handleLogout}>로그아웃</Logout>
 					</UserInfo>
 				</Right>
 			</Wrapper>
