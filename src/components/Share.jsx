@@ -50,15 +50,25 @@ const BottomLeft = styled.div`
 	/* background-color: pink; */
 `;
 
+const PhotoLabel = styled.label`
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+`;
+
 const PhotoIcon = styled.div`
 	color: black;
 	font-size: 22px;
 	margin: 0 4px;
 `;
 
-const PhotoText = styled.div`
+const PhotoText = styled.span`
 	font-size: 14px;
 	margin-bottom: 4px;
+`;
+
+const PhotoInput = styled.input`
+	display: none;
 `;
 
 const BottomRight = styled.div`
@@ -84,6 +94,7 @@ const Share = () => {
 	const { user } = useContext(AuthContext);
 
 	const [text, setText] = useState('');
+	const [file, setFile] = useState(null);
 
 	const changeShareText = (e) => {
 		setText(e.target.value);
@@ -94,9 +105,29 @@ const Share = () => {
 			userId: user._id,
 			text: text,
 		};
-		await axios.post('/posts', newPost);
-		// 게시물 공유 후 리렌더링을 위해 윈도우 리로딩
-		window.location.reload();
+
+		// 파일 존재 시 파일 업로드
+		if (file) {
+			const data = new FormData();
+			const fileName = Date.now() + file.name;
+			data.append('name', fileName);
+			data.append('file', file);
+			newPost.img = fileName;
+			try {
+				await axios.post('/upload', data);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+
+		try {
+			await axios.post('/posts', newPost);
+			console.log(newPost);
+			// 게시물 공유 후 리렌더링을 위해 윈도우 리로딩
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
@@ -112,10 +143,18 @@ const Share = () => {
 				<Hr />
 				<Bottom>
 					<BottomLeft>
-						<PhotoIcon>
-							<MdCameraAlt />
-						</PhotoIcon>
-						<PhotoText>사진</PhotoText>
+						<PhotoLabel htmlFor="file">
+							<PhotoIcon>
+								<MdCameraAlt />
+							</PhotoIcon>
+							<PhotoText>사진</PhotoText>
+							<PhotoInput
+								type="file"
+								id="file"
+								accept=".png, .jpeg, .jpg"
+								onChange={(e) => setFile(e.target.files[0])}
+							/>
+						</PhotoLabel>
 					</BottomLeft>
 					<BottomRight>
 						<ShareBtn onClick={handleShare}>공유</ShareBtn>

@@ -142,9 +142,11 @@ const Center = styled.div`
 	padding: 26px 8px;
 `;
 
-const Text = styled.div`
+const PostText = styled.div`
 	font-size: 15px;
 `;
+
+const PostImg = styled.img``;
 
 const Bottom = styled.div`
 	display: flex;
@@ -268,7 +270,7 @@ const Post = ({ post }) => {
 					</MoreContainer>
 				</Top>
 				<Center>
-					<Text>{post.text}</Text>
+					<PostText>{post.text}</PostText>
 				</Center>
 				<Bottom>
 					<Like>

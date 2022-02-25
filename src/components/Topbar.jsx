@@ -31,6 +31,15 @@ const Center = styled.div`
 
 const Right = styled.div`
 	flex: 2;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+`;
+
+const Logout = styled.div`
+	color: white;
+	margin-right: 40px;
+	cursor: pointer;
 `;
 
 const UserInfo = styled.div`
@@ -42,16 +51,12 @@ const UserInfo = styled.div`
 `;
 
 const UserImg = styled.img`
-	width: 46px;
-	height: 46px;
+	width: 48px;
+	height: 48px;
 	object-fit: cover;
 	border: 1px solid white;
 	border-radius: 50%;
 	margin-right: 10px;
-	cursor: pointer;
-`;
-
-const Logout = styled.div`
 	cursor: pointer;
 `;
 
@@ -80,6 +85,7 @@ const Topbar = () => {
 				</Left>
 				<Center></Center>
 				<Right>
+					<Logout onClick={handleLogout}>로그아웃</Logout>
 					<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
 						<UserImg
 							src={
@@ -88,7 +94,6 @@ const Topbar = () => {
 									: '/images/default.jpeg'
 							}
 						/>
-						<Logout onClick={handleLogout}>로그아웃</Logout>
 					</UserInfo>
 				</Right>
 			</Wrapper>
