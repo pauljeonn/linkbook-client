@@ -1,4 +1,5 @@
 import React, { useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { login } from '../api';
 import { AuthContext } from '../contexts/authContext';
@@ -33,11 +34,15 @@ const Logo = styled.div`
 const Right = styled.div`
 	flex: 1;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `;
 
-const LoginContainer = styled.div``;
+const LoginContainer = styled.div`
+	margin-top: 60px;
+	margin-bottom: 30px;
+`;
 
 const LoginForm = styled.form`
 	display: flex;
@@ -66,7 +71,19 @@ const LoginBtn = styled.button`
 	}
 `;
 
+const RegisterText = styled.div`
+	color: ${styles.themeColor};
+	font-size: 14px;
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(140%);
+	}
+`;
+
 const LoginPage = () => {
+	const navigate = useNavigate();
+
 	const email = useRef();
 	const password = useRef();
 
@@ -101,6 +118,9 @@ const LoginPage = () => {
 							</LoginBtn>
 						</LoginForm>
 					</LoginContainer>
+					<RegisterText onClick={() => navigate('/register')}>
+						아직 회원이 아니신가요?
+					</RegisterText>
 				</Right>
 			</Wrapper>
 		</Container>

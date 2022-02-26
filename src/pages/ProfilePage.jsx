@@ -18,7 +18,8 @@ const ProfileWrapper = styled.div`
 `;
 
 const ProfileCover = styled.div`
-	height: 280px;
+	width: 100%;
+	height: 450px;
 	background-color: skyblue;
 	display: flex;
 	flex-direction: column;
@@ -27,13 +28,13 @@ const ProfileCover = styled.div`
 
 const ProfileCoverImg = styled.img`
 	width: 100%;
-	height: 300px;
+	height: 100%;
 	object-fit: cover;
 `;
 
 const ProfileUserImg = styled.img`
-	width: 150px;
-	height: 150px;
+	width: 180px;
+	height: 180px;
 	object-fit: cover;
 	border: 5px solid white;
 	border-radius: 50%;
@@ -41,17 +42,18 @@ const ProfileUserImg = styled.img`
 	left: 0;
 	right: 0;
 	margin: auto;
-	bottom: -40px;
+	bottom: -24px;
 	z-index: 3;
 `;
 
 const ProfileUserName = styled.div`
-	height: 130px;
+	height: 80px;
 	background-color: white;
 	font-size: 30px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-end;
+	padding-bottom: 15px;
 `;
 
 const ProfileRightBottom = styled.div`
@@ -79,7 +81,10 @@ const ProfilePage = () => {
 				<Leftbar />
 				<ProfileWrapper>
 					<ProfileCover>
-						<ProfileCoverImg src={user.coverPicture ? user.coverPicture : ''} />
+						<ProfileCoverImg
+							src={user.coverPicture ? user.coverPicture : null}
+							alt=""
+						/>
 						<ProfileUserImg
 							src={
 								user.profilePicture
@@ -90,7 +95,7 @@ const ProfilePage = () => {
 					</ProfileCover>
 					<ProfileUserName>{user.username}</ProfileUserName>
 					<ProfileRightBottom>
-						<Feed />
+						<Feed isProfile={true} />
 						<Rightbar />
 					</ProfileRightBottom>
 				</ProfileWrapper>

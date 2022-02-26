@@ -28,11 +28,13 @@ const FriendList = styled.div`
 const FriendInfo = styled.div`
 	display: flex;
 	align-items: center;
+	margin-bottom: 15px;
 `;
 
 const FriendImg = styled.img`
 	width: 24px;
 	height: 24px;
+	object-fit: cover;
 	border-radius: 50%;
 	margin-right: 5px;
 `;

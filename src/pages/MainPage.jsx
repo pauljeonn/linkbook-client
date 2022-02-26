@@ -17,7 +17,7 @@ const MainPage = () => {
 			<Topbar />
 			<Wrapper>
 				<Leftbar />
-				<Feed />
+				<Feed isProfile={false} />
 				<Rightbar />
 			</Wrapper>
 		</Container>

@@ -33,11 +33,15 @@ const Logo = styled.div`
 const Right = styled.div`
 	flex: 1;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `;
 
-const RegisterContainer = styled.div``;
+const RegisterContainer = styled.div`
+	margin-top: 60px;
+	margin-bottom: 30px;
+`;
 
 const RegisterForm = styled.form`
 	display: flex;
@@ -65,13 +69,23 @@ const RegisterBtn = styled.button`
 	}
 `;
 
+const LoginText = styled.div`
+	color: ${styles.themeColor};
+	font-size: 14px;
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(140%);
+	}
+`;
+
 const RegisterPage = () => {
+	const navigate = useNavigate();
+
 	const username = useRef();
 	const email = useRef();
 	const password = useRef();
 	const passwordConfirm = useRef();
-
-	const navigate = useNavigate();
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
@@ -131,6 +145,7 @@ const RegisterPage = () => {
 							<RegisterBtn type="submit">회원가입</RegisterBtn>
 						</RegisterForm>
 					</RegisterContainer>
+					<LoginText onClick={() => navigate('/login')}>로그인</LoginText>
 				</Right>
 			</Wrapper>
 		</Container>

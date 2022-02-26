@@ -16,7 +16,7 @@ const Container = styled.div`
 	align-items: center;
 `;
 
-const Feed = () => {
+const Feed = ({ isProfile }) => {
 	const params = useParams();
 
 	const { user } = useContext(AuthContext);
@@ -53,7 +53,8 @@ const Feed = () => {
 
 	return (
 		<Container>
-			<Share />
+			{/* 프로필 페이지에서는 현재 유저 프로필에만 Share 컴포넌트 보여주기 */}
+			{isProfile ? user._id === params.id ? <Share /> : '' : <Share />}
 			{posts.map((post) => (
 				<Post key={post._id} post={post} />
 			))}
