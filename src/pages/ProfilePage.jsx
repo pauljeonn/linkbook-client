@@ -27,25 +27,26 @@ const ProfileCover = styled.div`
 
 const ProfileCoverImg = styled.img`
 	width: 100%;
-	height: 280px;
+	height: 300px;
+	object-fit: cover;
 `;
 
 const ProfileUserImg = styled.img`
 	width: 150px;
 	height: 150px;
 	object-fit: cover;
-	border: 4px solid white;
+	border: 5px solid white;
 	border-radius: 50%;
 	position: absolute;
 	left: 0;
 	right: 0;
 	margin: auto;
-	bottom: -20px;
+	bottom: -40px;
 	z-index: 3;
 `;
 
 const ProfileUserName = styled.div`
-	height: 100px;
+	height: 130px;
 	background-color: white;
 	font-size: 30px;
 	display: flex;
@@ -78,7 +79,7 @@ const ProfilePage = () => {
 				<Leftbar />
 				<ProfileWrapper>
 					<ProfileCover>
-						<ProfileCoverImg />
+						<ProfileCoverImg src={user.coverPicture ? user.coverPicture : ''} />
 						<ProfileUserImg
 							src={
 								user.profilePicture
