@@ -146,7 +146,10 @@ const PostText = styled.div`
 	font-size: 15px;
 `;
 
-const PostImg = styled.img``;
+const PostImg = styled.img`
+	width: 100%;
+	margin-top: 10px;
+`;
 
 const Bottom = styled.div`
 	display: flex;
@@ -271,6 +274,8 @@ const Post = ({ post }) => {
 				</Top>
 				<Center>
 					<PostText>{post.text}</PostText>
+					{/* 이미지가 존재할때만 보여주기 */}
+					{post.img && <PostImg src={post.img} alt="" />}
 				</Center>
 				<Bottom>
 					<Like>
