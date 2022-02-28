@@ -109,13 +109,11 @@ const Share = () => {
 		// 파일 존재 시 파일 업로드
 		if (file) {
 			const data = new FormData();
-			// const fileName = Date.now() + file.name;
-			// data.append('name', fileName);
 			data.append('file', file);
 			console.log(data);
 			try {
 				const res = await axios.post('/files/upload', data);
-				// 이미지 파일 업로드 후 생성된 url 받아오기
+				// 이미지 파일 업로드 후 생성된 url을 img 필드값으로 설정
 				newPost.img = res.data.url;
 			} catch (err) {
 				console.log(err);

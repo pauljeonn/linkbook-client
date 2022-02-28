@@ -18,7 +18,7 @@ const MainPage = () => {
 			<Wrapper>
 				<Leftbar />
 				<Feed isProfile={false} />
-				<Rightbar />
+				<Rightbar isProfile={false} />
 			</Wrapper>
 		</Container>
 	);

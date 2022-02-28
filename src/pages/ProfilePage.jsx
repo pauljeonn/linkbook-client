@@ -96,7 +96,7 @@ const ProfilePage = () => {
 					<ProfileUserName>{user.username}</ProfileUserName>
 					<ProfileRightBottom>
 						<Feed isProfile={true} />
-						<Rightbar />
+						<Rightbar isProfile={true} />
 					</ProfileRightBottom>
 				</ProfileWrapper>
 			</Wrapper>

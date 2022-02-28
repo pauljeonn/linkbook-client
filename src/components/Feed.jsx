@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 const Container = styled.div`
 	flex: 2;
 	background-color: ${styles.lightGrayColor};
-	padding-top: 30px;
+	padding: 30px 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
