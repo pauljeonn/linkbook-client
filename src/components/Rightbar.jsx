@@ -115,15 +115,31 @@ const Rightbar = ({ isProfile }) => {
 		const fetchRecommended = async () => {
 			if (!isProfile) {
 				try {
-					const res = await axios.get(`users/6213e6d9dd365c5d70fcfe34`);
-					setRecommended([res.data]);
+					// 모든 유저 불러오기
+					const res = await axios.get(`users/all/${user._id}`);
+					const users = res.data;
+
+					// 친구 아이디 추출
+					const friendIds = [];
+					friends.forEach((friend) => {
+						friendIds.push(friend._id);
+					});
+
+					// 친구 아이디에 일치하지 않는 유저들을 추천 목록에 추가
+					let recommended = [];
+					users.forEach((user) => {
+						if (!friendIds.includes(user._id)) {
+							recommended.push(user);
+						}
+					});
+					setRecommended(recommended);
 				} catch (err) {
 					console.log(err);
 				}
 			}
 		};
 		fetchRecommended();
-	}, [isProfile, user._id, params.id]);
+	}, [isProfile, user._id, params.id, friends]);
 
 	// 팔로우 & 언팔로우
 	const handleFollow = async () => {
@@ -189,7 +205,7 @@ const Rightbar = ({ isProfile }) => {
 				)}
 				{!isProfile && (
 					<SectionContainer>
-						<SectionTitle>추천</SectionTitle>
+						<SectionTitle>친구 추천</SectionTitle>
 						<RecommendedList>
 							{recommended.map((r) => (
 								<FriendInfo key={r._id}>

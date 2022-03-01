@@ -7,7 +7,7 @@ import { MdCameraAlt } from 'react-icons/md';
 
 const Container = styled.div`
 	width: 90%;
-	height: 200px;
+	height: 160px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
 	background-color: ${styles.whiteColor};
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const Top = styled.div`
-	height: 65%;
+	height: 60%;
 	display: flex;
 	align-items: center;
 	padding-left: 10px;
@@ -38,7 +38,7 @@ const ShareInput = styled.input`
 const Hr = styled.hr``;
 
 const Bottom = styled.div`
-	height: 35%;
+	height: 40%;
 	display: flex;
 `;
 
