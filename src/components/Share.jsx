@@ -80,7 +80,7 @@ const BottomRight = styled.div`
 `;
 
 const ShareBtn = styled.button`
-	width: 68px;
+	width: 80px;
 	height: 32px;
 	border: none;
 	border-radius: 5px;
@@ -88,6 +88,10 @@ const ShareBtn = styled.button`
 	color: ${styles.whiteColor};
 	font-size: 15px;
 	cursor: pointer;
+
+	&:hover {
+		filter: brightness(110%);
+	}
 `;
 
 const Share = () => {

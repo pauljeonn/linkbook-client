@@ -8,14 +8,28 @@ const Container = styled.div`
 	position: sticky;
 	top: 80px;
 	background-color: #fefefe;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+const StyledImg = styled.img`
+	width: 70%;
+`;
 
 const Leftbar = () => {
 	return (
 		<Container>
-			<Wrapper></Wrapper>
+			<Wrapper>
+				<StyledImg src={`/images/illust-1.svg`} />
+			</Wrapper>
 		</Container>
 	);
 };

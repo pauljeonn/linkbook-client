@@ -36,13 +36,15 @@ const Overlay = styled.div`
 const ConfirmContainer = styled.div`
 	width: 400px;
 	height: 150px;
-	background-color: white;
 	border-radius: 5px;
+	background-color: white;
 	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
 `;
 
 const ConfirmHeader = styled.div`
-	height: 50px;
+	height: 42px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	background-color: ${styles.themeColor};
 	color: white;
 	padding: 10px;
@@ -50,6 +52,8 @@ const ConfirmHeader = styled.div`
 
 const ConfirmBody = styled.div`
 	height: 50px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 	padding: 10px;
 `;
 
@@ -65,6 +69,7 @@ const ConfirmBtn = styled.button`
 	height: 30px;
 	margin: 0 10px;
 	border: none;
+	border-radius: 5px;
 	background-color: ${styles.themeColor};
 	color: white;
 	cursor: pointer;
@@ -122,18 +127,20 @@ const MoreIcon = styled.div`
 
 const MoreContainer = styled.div`
 	width: 80px;
-	height: 50px;
-	background-color: white;
+	background-color: ${styles.deleteColor};
+	color: white;
+	border-radius: 5px;
 	position: absolute;
 	right: 18px;
 	z-index: ${(props) => (props.isMore ? 3 : -3)};
 `;
 
 const MoreItem = styled.div`
-	height: 50%;
-	border: 1px solid ${styles.GrayColor};
+	height: 32px;
 	font-size: 14px;
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	user-select: none;
 	cursor: pointer;
 `;
@@ -268,7 +275,7 @@ const Post = ({ post }) => {
 						<MdOutlineMoreVert />
 					</MoreIcon>
 					<MoreContainer isMore={isMore}>
-						<MoreItem>수정</MoreItem>
+						{/* <MoreItem>수정</MoreItem> */}
 						<MoreItem onClick={toggleDelete}>삭제</MoreItem>
 					</MoreContainer>
 				</Top>

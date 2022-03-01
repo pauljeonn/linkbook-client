@@ -31,6 +31,7 @@ const FollowBtn = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	outline: none;
 	cursor: pointer;
 
 	&:hover {
@@ -148,6 +149,7 @@ const Rightbar = ({ isProfile }) => {
 	return (
 		<Container>
 			<Wrapper>
+				{/* 본인이 아닌 프로필 페이지에서만 보여주기 */}
 				{isProfile && user._id !== params.id && (
 					// 팔로우 상태에 따라 버튼 텍스트 변경
 					<FollowBtn onClick={handleFollow}>

@@ -7,9 +7,16 @@ import Leftbar from '../components/Leftbar';
 import Rightbar from '../components/Rightbar';
 import Topbar from '../components/Topbar';
 
-const Container = styled.div``;
+const Container = styled.div`
+	background-color: #eee;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
 
 const Wrapper = styled.div`
+	width: 100%;
+	max-width: 1600px;
 	display: flex;
 `;
 
@@ -47,7 +54,7 @@ const ProfileUserImg = styled.img`
 `;
 
 const ProfileUserName = styled.div`
-	height: 80px;
+	height: 85px;
 	background-color: white;
 	font-size: 30px;
 	display: flex;
