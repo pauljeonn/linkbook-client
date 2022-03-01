@@ -6,6 +6,7 @@ import Feed from '../components/Feed';
 import Leftbar from '../components/Leftbar';
 import Rightbar from '../components/Rightbar';
 import Topbar from '../components/Topbar';
+import { styles } from '../styles';
 
 const Container = styled.div`
 	background-color: #eee;
@@ -24,13 +25,16 @@ const ProfileWrapper = styled.div`
 	flex: 3;
 `;
 
+const ProfileRightTop = styled.div``;
+
 const ProfileCover = styled.div`
 	width: 100%;
-	height: 450px;
+	height: ${styles.profileCoverHeight};
 	background-color: skyblue;
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	z-index: 5;
 `;
 
 const ProfileCoverImg = styled.img`
@@ -49,12 +53,12 @@ const ProfileUserImg = styled.img`
 	left: 0;
 	right: 0;
 	margin: auto;
-	bottom: -24px;
+	bottom: ${styles.profileImgPaddingBottom};
 	z-index: 3;
 `;
 
 const ProfileUserName = styled.div`
-	height: 85px;
+	height: ${styles.profileNameHeight};
 	background-color: white;
 	font-size: 30px;
 	display: flex;
@@ -87,20 +91,22 @@ const ProfilePage = () => {
 			<Wrapper>
 				<Leftbar />
 				<ProfileWrapper>
-					<ProfileCover>
-						<ProfileCoverImg
-							src={user.coverPicture ? user.coverPicture : null}
-							alt=""
-						/>
-						<ProfileUserImg
-							src={
-								user.profilePicture
-									? user.profilePicture
-									: '/images/default.jpeg'
-							}
-						/>
-					</ProfileCover>
-					<ProfileUserName>{user.username}</ProfileUserName>
+					<ProfileRightTop>
+						<ProfileCover>
+							<ProfileCoverImg
+								src={user.coverPicture ? user.coverPicture : null}
+								alt=""
+							/>
+							<ProfileUserImg
+								src={
+									user.profilePicture
+										? user.profilePicture
+										: '/images/default.jpeg'
+								}
+							/>
+						</ProfileCover>
+						<ProfileUserName>{user.username}</ProfileUserName>
+					</ProfileRightTop>
 					<ProfileRightBottom>
 						<Feed isProfile={true} />
 						<Rightbar isProfile={true} />

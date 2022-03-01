@@ -30,7 +30,7 @@ const Overlay = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: ${(props) => (props.isDelete ? 10 : -10)};
+	z-index: ${(props) => (props.isDelete ? 20 : -20)};
 `;
 
 const ConfirmContainer = styled.div`

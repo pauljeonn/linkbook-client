@@ -8,7 +8,7 @@ import { MdOutlinePersonAddAlt } from 'react-icons/md';
 
 const Container = styled.div`
 	flex: 1;
-	height: calc(100vh - 80px);
+	height: calc(100vh - ${styles.topbarHeight});
 	position: sticky;
 	top: 80px;
 	background-color: ${styles.whiteColor};
@@ -163,7 +163,7 @@ const Rightbar = ({ isProfile }) => {
 	};
 
 	return (
-		<Container>
+		<Container isProfile={isProfile}>
 			<Wrapper>
 				{/* 본인이 아닌 프로필 페이지에서만 보여주기 */}
 				{isProfile && user._id !== params.id && (

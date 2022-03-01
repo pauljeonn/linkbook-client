@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { styles } from '../styles';
 
 const Container = styled.div`
 	flex: 1;
-	height: calc(100vh - 80px);
+	height: calc(100vh - ${styles.topbarHeight});
 	position: sticky;
 	top: 80px;
 	background-color: #fefefe;

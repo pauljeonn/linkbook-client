@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthContext } from '../contexts/authContext';
 import { styles } from '../styles';
+import { MdLogout } from 'react-icons/md';
 
 const Container = styled.div`
 	width: 100%;
-	height: 80px;
+	height: ${styles.topbarHeight};
 	background-color: ${styles.themeColor};
 	position: sticky;
 	top: 0;
-	z-index: 5;
+	z-index: 10;
 `;
 
 const Wrapper = styled.div`
@@ -39,7 +40,14 @@ const Right = styled.div`
 const Logout = styled.div`
 	color: white;
 	margin-right: 40px;
+	display: flex;
 	cursor: pointer;
+`;
+
+const LogoutIcon = styled.div`
+	margin-right: 4px;
+	display: flex;
+	align-items: center;
 `;
 
 const UserInfo = styled.div`
@@ -85,7 +93,12 @@ const Topbar = () => {
 				</Left>
 				<Center></Center>
 				<Right>
-					<Logout onClick={handleLogout}>로그아웃</Logout>
+					<Logout onClick={handleLogout}>
+						<LogoutIcon>
+							<MdLogout />
+						</LogoutIcon>
+						로그아웃
+					</Logout>
 					<UserInfo onClick={() => navigate(`/profile/${user._id}`)}>
 						<UserImg
 							src={
