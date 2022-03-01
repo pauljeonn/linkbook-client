@@ -70,7 +70,9 @@ const FriendImg = styled.img`
 	margin-right: 5px;
 `;
 
-const RecommendedList = styled.div``;
+const RecommendedList = styled.div`
+	padding: 12px 5px;
+`;
 
 const FriendName = styled.div`
 	cursor: pointer;
@@ -80,12 +82,15 @@ const Rightbar = ({ isProfile }) => {
 	const navigate = useNavigate();
 	const params = useParams();
 
-	const { user } = useContext(AuthContext);
+	const { user, dispatch } = useContext(AuthContext);
 
 	const [friends, setFriends] = useState([]);
 	const [recommended, setRecommended] = useState([]);
-	const [following, setFollowing] = useState(false);
+	const [following, setFollowing] = useState(
+		user.following.includes(params.id)
+	);
 
+	// 친구 목록 불러오기
 	useEffect(() => {
 		const fetchFriends = async () => {
 			try {
@@ -104,25 +109,37 @@ const Rightbar = ({ isProfile }) => {
 		fetchFriends();
 	}, [user._id, params.id]);
 
+	// 추천 목록 불러오기
 	useEffect(() => {
-		setFollowing(user.following.includes(params?.id));
-	}, [user.following, params.id]);
+		const fetchRecommended = async () => {
+			if (!isProfile) {
+				try {
+					const res = await axios.get(`users/6213e6d9dd365c5d70fcfe34`);
+					setRecommended([res.data]);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		};
+		fetchRecommended();
+	}, [isProfile, user._id, params.id]);
 
 	// 팔로우 & 언팔로우
 	const handleFollow = async () => {
 		try {
 			if (following) {
-				console.log('언팔');
-				const res = await axios.put(`/users/${user._id}/unfollow`, {
+				await axios.put(`/users/${user._id}/unfollow`, {
 					userId: params.id,
 				});
-				console.log(res);
+				await dispatch({ type: 'UNFOLLOW', payload: params.id });
 			} else {
-				console.log('팔');
 				await axios.put(`/users/${user._id}/follow`, {
 					userId: params.id,
 				});
+				await dispatch({ type: 'FOLLOW', payload: params.id });
 			}
+			// 로컬 팔로잉 상태 변경
+			setFollowing(!following);
 		} catch (err) {
 			console.log(err);
 		}
@@ -132,6 +149,7 @@ const Rightbar = ({ isProfile }) => {
 		<Container>
 			<Wrapper>
 				{isProfile && user._id !== params.id && (
+					// 팔로우 상태에 따라 버튼 텍스트 변경
 					<FollowBtn onClick={handleFollow}>
 						{following ? (
 							''
@@ -140,7 +158,7 @@ const Rightbar = ({ isProfile }) => {
 								<MdOutlinePersonAddAlt />
 							</FollowIcon>
 						)}
-						{following ? '언팔로우' : '팔로우'}
+						{user.following && following ? '언팔로우' : '팔로우'}
 					</FollowBtn>
 				)}
 				{/* 친구가 존재할 경우에 친구 목록 보이기 */}
@@ -167,10 +185,27 @@ const Rightbar = ({ isProfile }) => {
 						</FriendList>
 					</SectionContainer>
 				)}
-				<SectionContainer>
-					<SectionTitle>추천</SectionTitle>
-					<RecommendedList></RecommendedList>
-				</SectionContainer>
+				{!isProfile && (
+					<SectionContainer>
+						<SectionTitle>추천</SectionTitle>
+						<RecommendedList>
+							{recommended.map((r) => (
+								<FriendInfo key={r._id}>
+									<FriendImg
+										src={
+											r.profilePicture
+												? r.profilePicture
+												: '/images/default.jpeg'
+										}
+									/>
+									<FriendName onClick={() => navigate(`/profile/${r._id}`)}>
+										{r.username}
+									</FriendName>
+								</FriendInfo>
+							))}
+						</RecommendedList>
+					</SectionContainer>
+				)}
 			</Wrapper>
 		</Container>
 	);

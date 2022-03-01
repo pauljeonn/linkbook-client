@@ -7,7 +7,7 @@ const Container = styled.div`
 	height: calc(100vh - 80px);
 	position: sticky;
 	top: 80px;
-	background-color: ${styles.whiteColor};
+	background-color: #fefefe;
 `;
 
 const Wrapper = styled.div``;
