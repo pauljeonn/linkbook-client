@@ -47,6 +47,7 @@ const ProfileUserImg = styled.img`
 	width: 180px;
 	height: 180px;
 	object-fit: cover;
+	background-color: white;
 	border: 5px solid white;
 	border-radius: 50%;
 	position: absolute;
@@ -64,7 +65,7 @@ const ProfileUserName = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-	padding-bottom: 15px;
+	padding-bottom: ${styles.profileNamePaddingBottom};
 `;
 
 const ProfileRightBottom = styled.div`
@@ -94,7 +95,9 @@ const ProfilePage = () => {
 					<ProfileRightTop>
 						<ProfileCover>
 							<ProfileCoverImg
-								src={user.coverPicture ? user.coverPicture : null}
+								src={
+									user.coverPicture ? user.coverPicture : '/images/cover.jpeg'
+								}
 								alt=""
 							/>
 							<ProfileUserImg

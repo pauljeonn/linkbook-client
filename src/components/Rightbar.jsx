@@ -205,7 +205,7 @@ const Rightbar = ({ isProfile }) => {
 				)}
 				{!isProfile && (
 					<SectionContainer>
-						<SectionTitle>친구 추천</SectionTitle>
+						<SectionTitle>팔로우 추천</SectionTitle>
 						<RecommendedList>
 							{recommended.map((r) => (
 								<FriendInfo key={r._id}>

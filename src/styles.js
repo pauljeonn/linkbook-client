@@ -12,6 +12,7 @@ export const styles = {
 	// Dimensions
 	topbarHeight: '80px',
 	profileCoverHeight: '420px',
-	profileNameHeight: '90px',
+	profileNameHeight: '95px',
 	profileImgPaddingBottom: '-20px',
+	profileNamePaddingBottom: '20px',
 };

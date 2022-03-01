@@ -7,6 +7,7 @@ import { styles } from '../styles';
 
 const Container = styled.div`
 	height: 100vh;
+	/* background-color: #d6f5ff; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -21,7 +22,13 @@ const Wrapper = styled.div`
 const Left = styled.div`
 	flex: 1;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+`;
+
+const ThemeImg = styled.img`
+	width: 250px;
+	margin-bottom: 10px;
 `;
 
 const Logo = styled.div`
@@ -29,6 +36,10 @@ const Logo = styled.div`
 	font-size: 54px;
 	font-weight: 700;
 	color: ${styles.themeColor};
+`;
+
+const LogoText = styled.div`
+	font-size: 18px;
 `;
 
 const Right = styled.div`
@@ -102,7 +113,9 @@ const LoginPage = () => {
 		<Container>
 			<Wrapper>
 				<Left>
+					<ThemeImg src="/images/people.svg" alt="" />
 					<Logo>LINKBOOK</Logo>
+					<LogoText>전세계 사람들과 소통하는 공간</LogoText>
 				</Left>
 				<Right>
 					<LoginContainer>
