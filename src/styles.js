@@ -1,7 +1,7 @@
 export const styles = {
 	// Colors
 	themeColor: '#3d6ed1',
-	subColor: 'blue',
+	errorColor: '#ff0000',
 	deleteColor: '#fa5a57',
 	blackColor: '#000',
 	whiteColor: '#fff',

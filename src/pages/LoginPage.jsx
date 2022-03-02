@@ -75,11 +75,17 @@ const LoginBtn = styled.button`
 	color: ${styles.whiteColor};
 	font-size: 16px;
 	font-weight: 400;
+	margin-bottom: 5px;
 	cursor: pointer;
 
 	&:hover {
 		filter: brightness(110%);
 	}
+`;
+
+const ErrorText = styled.div`
+	color: ${styles.errorColor};
+	font-size: 13px;
 `;
 
 const RegisterText = styled.div`
@@ -98,7 +104,7 @@ const LoginPage = () => {
 	const email = useRef();
 	const password = useRef();
 
-	const { pending, dispatch } = useContext(AuthContext);
+	const { pending, error, dispatch } = useContext(AuthContext);
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -130,6 +136,7 @@ const LoginPage = () => {
 								로그인
 							</LoginBtn>
 						</LoginForm>
+						{error && <ErrorText>로그인에 실패하였습니다.</ErrorText>}
 					</LoginContainer>
 					<RegisterText onClick={() => navigate('/register')}>
 						아직 회원이 아니신가요?
