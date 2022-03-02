@@ -107,7 +107,6 @@ const RegisterPage = () => {
 	const [error, setError] = useState('');
 
 	const changeUsername = (e) => {
-		console.log(e.target.value);
 		setUsername(e.target.value);
 	};
 

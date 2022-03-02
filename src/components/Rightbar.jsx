@@ -9,9 +9,10 @@ import { MdOutlinePersonAddAlt } from 'react-icons/md';
 const Container = styled.div`
 	flex: 1;
 	height: calc(100vh - ${styles.topbarHeight});
+	background-color: ${styles.whiteColor};
 	position: sticky;
 	top: 80px;
-	background-color: ${styles.whiteColor};
+	overflow-y: scroll;
 `;
 
 const Wrapper = styled.div`
