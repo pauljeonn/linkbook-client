@@ -104,7 +104,20 @@ const Share = () => {
 		setText(e.target.value);
 	};
 
+	const changeShareFile = (e) => {
+		if (e.target.files[0].size > 1024 * 1024) {
+			alert('1MB 이하의 사진을 업로드해주세요.');
+		} else {
+			setFile(e.target.files[0]);
+		}
+	};
+
 	const handleShare = async () => {
+		if (!text && !file) {
+			alert('텍스트 작성 또는 사진을 업로드해주세요.');
+			return;
+		}
+
 		const newPost = {
 			userId: user._id,
 			text: text,
@@ -156,7 +169,7 @@ const Share = () => {
 								type="file"
 								id="file"
 								accept=".png, .jpeg, .jpg"
-								onChange={(e) => setFile(e.target.files[0])}
+								onChange={(e) => changeShareFile(e)}
 							/>
 						</PhotoLabel>
 					</BottomLeft>

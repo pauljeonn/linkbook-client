@@ -271,9 +271,12 @@ const Post = ({ post }) => {
 						</UserInfo>
 						<PostDate>{postDate}</PostDate>
 					</PostInfo>
-					<MoreIcon onClick={toggleMore}>
-						<MdOutlineMoreVert />
-					</MoreIcon>
+					{/* 본인 포스트만 삭제 가능 */}
+					{user._id === currentUser._id && (
+						<MoreIcon onClick={toggleMore}>
+							<MdOutlineMoreVert />
+						</MoreIcon>
+					)}
 					<MoreContainer isMore={isMore}>
 						{/* <MoreItem>수정</MoreItem> */}
 						<MoreItem onClick={toggleDelete}>삭제</MoreItem>

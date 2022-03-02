@@ -37,7 +37,7 @@ const Logo = styled.div`
 `;
 
 const LogoText = styled.div`
-	font-size: 18px;
+	font-size: 16px;
 `;
 
 const Right = styled.div`
@@ -128,7 +128,7 @@ const RegisterPage = () => {
 					<ThemeImg src="/images/people.svg" alt="" />
 
 					<Logo>LINKBOOK</Logo>
-					<LogoText>전세계 사람들과 소통하는 공간</LogoText>
+					<LogoText>사람들과 자유롭게 일상을 공유하는 공간</LogoText>
 				</Left>
 				<Right>
 					<RegisterContainer>
