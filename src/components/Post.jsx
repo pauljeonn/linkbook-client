@@ -141,7 +141,6 @@ const MoreItem = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	user-select: none;
 	cursor: pointer;
 `;
 
@@ -181,6 +180,7 @@ const Comment = styled.div``;
 
 const Post = ({ post }) => {
 	const navigate = useNavigate();
+
 	const { user: currentUser } = useContext(AuthContext);
 
 	const [user, setUser] = useState({});

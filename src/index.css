@@ -5,4 +5,5 @@
 	box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;
 	overscroll-behavior: none;
+	user-select: none;
 }

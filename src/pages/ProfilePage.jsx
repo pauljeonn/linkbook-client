@@ -78,6 +78,11 @@ const ProfilePage = () => {
 	const [user, setUser] = useState({});
 
 	useEffect(() => {
+		// 다른 사용자 프로필 방문 시 페이지 상단으로 스크롤
+		window.scrollTo(0, 0);
+	}, [params.id]);
+
+	useEffect(() => {
 		const fetchUser = async () => {
 			// 프로필 유저 정보 가져오기
 			const res = await axios.get(`/users/${params.id}`);

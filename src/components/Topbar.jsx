@@ -31,7 +31,6 @@ const Logo = styled.div`
 	font-size: 32px;
 	font-weight: 700;
 	color: white;
-	user-select: none;
 	cursor: pointer;
 `;
 
@@ -67,7 +66,6 @@ const UserImg = styled.img`
 
 const UserName = styled.div`
 	font-size: 18px;
-	user-select: none;
 `;
 
 const DropdownIcon = styled.div`
@@ -106,9 +104,7 @@ const LogoutIcon = styled.div`
 	align-items: center;
 `;
 
-const LogoutText = styled.div`
-	user-select: none;
-`;
+const LogoutText = styled.div``;
 
 const Topbar = () => {
 	const navigate = useNavigate();

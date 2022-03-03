@@ -13,6 +13,11 @@ const Container = styled.div`
 	position: sticky;
 	top: 80px;
 	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
 `;
 
 const Wrapper = styled.div`
